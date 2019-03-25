@@ -6,8 +6,8 @@ function Ball() {
 
   this.x = width/2;
   this.y = height/2;
-  this.xv = random(-2,2);
-  this.yv = random(-2,2);
+  this.xv = random(-10,10);
+  this.yv = random(-10,10);
 
   this.show = function() {
     fill(0,255,255);
@@ -15,10 +15,10 @@ function Ball() {
   }
 
   this.bounce = function() {
-    if (this.y <= 0 || this.y >= height) {
+    if (this.y <= 16 || this.y >= height - 16) {
       this.yv *= -1;
     }
-    if (this.x <= 0 || this.x >= width) {
+    if (this.x <= 16 || this.x >= width - 16) {
       this.xv *= -1;
     }
   }
