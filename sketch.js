@@ -3,6 +3,8 @@
 //create two paddles with different button params
 var ball;
 var paddle;
+var walls = [];
+var colors = [[135,206,250],[0,255,255],[30,144,255],[0,0,205],[25,25,112]];
 
 function rebound(ball, paddle) {
 
@@ -25,8 +27,12 @@ function draw() {
   ball.update();
   ball.bounce();
   paddle.show();
-  paddle.block()
+  paddle.block();
   rebound(ball,paddle);
+  for (i=0;i<walls.length;i++) {
+    fill(colors[walls[i].level]);
+    walls[i].show();
+  }
 }
 
 function keyPressed() {
