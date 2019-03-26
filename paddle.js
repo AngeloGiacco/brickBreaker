@@ -14,14 +14,35 @@ function Paddle(x,y) {
   }
 
   this.moveUp = function() {
-    this.yv -= 1;
+    if (this.yv > 0) {
+      this.yv = 0;
+    }else {
+      this.yv -= 3;
+    }
   }
 
   this.moveDown = function() {
-    this.yv += 1;
+    if (this.yv < 0) {
+      this.yv = 0;
+    } else {
+      this.yv += 3;
+    }
   }
 
   this.update = function() {
     this.y += this.yv;
+  }
+
+  this.block = function() {
+    if (this.y < 0 + this.h/2) {
+      this.y = this.h/2;
+      this.yv = 0;
+    } else if (this.y > height - this.h/2) {
+      this.y = height - this.h/2;
+      this.yv = 0;
+    }
+    if (this.x <= 16 || this.x >= width - 16) {
+      this.xv *= -1;
+    }
   }
 }
