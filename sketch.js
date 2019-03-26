@@ -4,6 +4,15 @@
 var ball;
 var paddle;
 
+function rebound(ball, paddle) {
+
+  if (ball.x < paddle.x + paddle.w / 2 && ball.x > paddle.x - paddle.w / 2) {
+    if (ball.y > paddle.y - paddle.h/2 && ball.y < paddle.y + paddle.h/2) {
+      ball.xv *= -1;
+    }
+  }
+}
+
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
   ball = new Ball();
@@ -16,8 +25,8 @@ function draw() {
   ball.update();
   ball.bounce();
   paddle.show();
-  paddle.update();
   paddle.block()
+  rebound(ball,paddle);
 }
 
 function keyPressed() {
