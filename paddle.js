@@ -4,7 +4,6 @@
 function Paddle(x,y) {
   this.x = x;
   this.y = y;
-  this.yv = 0;
   this.h = 300;
   this.w = 30;
 
@@ -14,23 +13,11 @@ function Paddle(x,y) {
   }
 
   this.moveUp = function() {
-    if (this.yv > 0) {
-      this.yv = 0;
-    }else {
-      this.yv -= 3;
-    }
+    this.y -= height / 10;
   }
 
   this.moveDown = function() {
-    if (this.yv < 0) {
-      this.yv = 0;
-    } else {
-      this.yv += 3;
-    }
-  }
-
-  this.update = function() {
-    this.y += this.yv;
+    this.y += height/10;
   }
 
   this.block = function() {
