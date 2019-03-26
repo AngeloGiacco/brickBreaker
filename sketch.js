@@ -16,4 +16,14 @@ function draw() {
   ball.update();
   ball.bounce();
   paddle.show();
+  paddle.update();
+  paddle.block()
+}
+
+function keyPressed() {
+  if (keyCode == DOWN_ARROW) {
+    paddle.moveDown();
+  } else if (keyCode == UP_ARROW) {
+    paddle.moveUp();
+  }
 }
