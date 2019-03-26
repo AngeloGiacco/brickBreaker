@@ -8,17 +8,19 @@ function Ball() {
   this.y = height/2;
   this.xv = random(-10,10);
   this.yv = random(-10,10);
+  this.width = 32;
+  this.height = 32;
 
   this.show = function() {
     fill(0,255,255);
-    ellipse(this.x, this.y,32,32);
+    ellipse(this.x, this.y,this.width,this.height);
   }
 
   this.bounce = function() {
-    if (this.y <= 16 || this.y >= height - 16) {
+    if (this.y <= this.height / 2 || this.y >= height - this.height / 2) {
       this.yv *= -1;
     }
-    if (this.x <= 16 || this.x >= width - 16) {
+    if (this.x <= this.width / 2 || this.x >= width - this.width / 2) {
       this.xv *= -1;
     }
   }
