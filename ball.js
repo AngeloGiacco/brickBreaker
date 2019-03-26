@@ -6,8 +6,8 @@ function Ball() {
 
   this.x = width/2;
   this.y = height/2;
-  this.xv = random(-10,10);
-  this.yv = random(-10,10);
+  this.xv = random(3,10);
+  this.yv = random(3,10);
   this.width = 32;
   this.height = 32;
 
