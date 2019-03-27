@@ -7,9 +7,7 @@ function Wall(x,y,w,h,level) {
   this.level = level;
 
   this.reduceLevel = function() {
-    if (this.level > 0) {
-      this.level -= 1;
-    }
+    this.level -= 1;
   }
 
   this.show = function() {
