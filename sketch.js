@@ -10,6 +10,15 @@ function rebound() {
   if (ball.x < paddle.x + paddle.w / 2 && ball.x > paddle.x - paddle.w / 2) {
     if (ball.y > paddle.y - paddle.h/2 && ball.y < paddle.y + paddle.h/2) {
       ball.xv *= -1;
+      if (ball.y > paddle.y + (paddle.h / 4) && ball.yv < 0) {
+        ball.yv *= -1;
+      } else if (ball.y < paddle.y - (paddle.h / 4) && ball.yv > 0) {
+        ball.yv *= -1;
+      //} else if (ball.y > paddle.y - (paddle.h / 4)) {
+        //ball.yv *= -1.1
+      //} else if (ball.y < paddle.y - (paddle.h / 4)) {
+        //ball.yv *= -1.1;
+      }
     }
   }
 }
@@ -19,7 +28,11 @@ function breakWall() {
     if (ball.x > walls[i].x && ball.x < walls[i].x + walls[i].width) {
       if (ball.y > walls[i].y && ball.y < walls[i].y + walls[i].height) {
         ball.xv *= -1;
-        walls[i].reduceLevel();
+        if (walls[i].level > 0) {
+          walls[i].reduceLevel();
+        } else {
+          walls.splice(i,1);
+        }
       }
     }
   }
