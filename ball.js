@@ -4,7 +4,7 @@
 
 function Ball() {
 
-  this.x = width/2-10;
+  this.x = width/2 - 10;
   this.y = height/2;
   this.xv = random(6,10);
   this.xv *= -1;
@@ -31,6 +31,7 @@ function Ball() {
     }
     if (this.x >= width - this.width / 2) {
       this.xv *= -1;
+      this.x = width - this.width / 2 - 4;
     } else if (this.x <= this.width / 2) {
       this.lives -= 1;
       if (this.lives > 0) {
