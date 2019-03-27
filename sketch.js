@@ -5,6 +5,11 @@ var ball;
 var paddle;
 var walls = [];
 var colors = [[135,206,250],[0,255,255],[30,144,255],[0,0,205],[25,25,112]];
+var end = false;
+
+function nextRound() {
+  ball = new Ball()
+}
 
 function rebound() {
   if (ball.x < paddle.x + paddle.w / 2 && ball.x > paddle.x - paddle.w / 2) {
@@ -28,6 +33,7 @@ function breakWall() {
     if (ball.x > walls[i].x && ball.x < walls[i].x + walls[i].width) {
       if (ball.y > walls[i].y && ball.y < walls[i].y + walls[i].height) {
         ball.xv *= -1;
+        ball.score += 1;
         if (walls[i].level > 0) {
           walls[i].reduceLevel();
         } else {
@@ -71,6 +77,15 @@ function draw() {
     walls[i].show();
   }
   breakWall();
+  fill(255);
+  textSize(20);
+  if (!ball.end) {
+    message = "lives: " + ball.lives.toString();
+
+  } else {
+    message = "Game over, score: "+ball.score.toString();
+  }
+  text(message,width/4,30);
 }
 
 function keyPressed() {
