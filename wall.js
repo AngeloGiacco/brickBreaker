@@ -1,13 +1,15 @@
-function Wall(x,y,width,height,level) {
+function Wall(x,y,w,h,level) {
 
   this.x = x;
   this.y = y;
-  this.width = width;
-  this.height = height;
+  this.width = w;
+  this.height = h;
   this.level = level;
 
   this.reduceLevel = function() {
-    this.levels = (this.level > 0) ? this.level - 1 : this.level;
+    if (this.level > 0) {
+      this.level -= 1;
+    }
   }
 
   this.show = function() {
