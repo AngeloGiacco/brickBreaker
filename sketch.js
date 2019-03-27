@@ -5,11 +5,6 @@ var ball;
 var paddle;
 var walls = [];
 var colors = [[135,206,250],[0,255,255],[30,144,255],[0,0,205],[25,25,112]];
-var end = false;
-
-function nextRound() {
-  ball = new Ball()
-}
 
 function rebound() {
   if (ball.x < paddle.x + paddle.w / 2 && ball.x > paddle.x - paddle.w / 2) {
@@ -80,8 +75,11 @@ function draw() {
   fill(255);
   textSize(20);
   if (!ball.end) {
-    message = "lives: " + ball.lives.toString();
-
+    if (ball.win) {
+      message = "VICTORY!!!!";
+    } else {
+      message = "lives: " + ball.lives.toString();
+    }
   } else {
     message = "Game over, score: "+ball.score.toString();
   }
