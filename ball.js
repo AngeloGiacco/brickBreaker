@@ -4,9 +4,10 @@
 
 function Ball() {
 
-  this.x = width/2;
+  this.x = width/2 - 50;
   this.y = height/2;
   this.xv = random(6,10);
+  this.xv *= -1;
   this.yv = random(6,10);
   this.width = 32;
   this.height = 32;
