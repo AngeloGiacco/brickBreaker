@@ -1,6 +1,4 @@
-//show the ball and paddle
-//update scores
-//create two paddles with different button params
+//MUST UPDATE BREAK WALL FUNCTION TO SEE WHICH SIDE HIT AND AFFECT Y AND X Vs ACCORDINGLY
 var ball;
 var paddle;
 var walls = [];
@@ -20,10 +18,6 @@ function rebound() {
         ball.yv *= -1;
       } else if (ball.y < paddle.y - (paddle.h / 4) && ball.yv > 0) {
         ball.yv *= -1;
-      //} else if (ball.y > paddle.y - (paddle.h / 4)) {
-        //ball.yv *= -1.1
-      //} else if (ball.y < paddle.y - (paddle.h / 4)) {
-        //ball.yv *= -1.1;
       }
     }
   }
