@@ -4,13 +4,17 @@
 
 function Ball() {
 
-  this.x = width/2 - 50;
+  this.x = width;
   this.y = height/2;
   this.xv = random(6,10);
   this.xv *= -1;
   this.yv = random(6,10);
   this.width = 32;
   this.height = 32;
+  this.lives = 3;
+  this.score = 0;
+  this.end = false;
+  this.win = false;
 
   this.show = function() {
     fill(0,255,255);
@@ -21,8 +25,19 @@ function Ball() {
     if (this.y <= this.height / 2 || this.y >= height - this.height / 2) {
       this.yv *= -1;
     }
-    if (this.x <= this.width / 2 || this.x >= width - this.width / 2) {
+    if (this.x >= width - this.width / 2) {
       this.xv *= -1;
+    } else if (this.x <= this.width / 2) {
+      this.lives -= 1;
+      if (this.lives > 0) {
+        this.x = width/2 - 50;
+        this.y = height/2;
+        this.xv = random(6,10);
+        this.xv *= -1;
+        this.yv = random(6,10);
+      } else {
+        this.end = true;
+      }
     }
   }
 
