@@ -21,7 +21,8 @@ function createWalls() {
       h = height / 10;
       startX = width/2 + i * w / colors.length;
       startY = j * h / 10;
-      var wall = new Wall(startX, startY, w, h) ;
+      var wall = new Wall(startX, startY, w, h, i);
+      walls.push(wall);
     }
   }
 }
@@ -42,7 +43,7 @@ function draw() {
   paddle.block();
   rebound(ball,paddle);
   for (i=0;i<walls.length;i++) {
-    fill(colors[walls[i].level]);
+    fill(colors[walls[i].level][0],colors[walls[i].level][1],colors[walls[i].level][2]);
     walls[i].show();
   }
 }
