@@ -4,7 +4,7 @@
 
 function Ball() {
 
-  this.x = width;
+  this.x = width/2-10;
   this.y = height/2;
   this.xv = random(6,10);
   this.xv *= -1;
@@ -14,7 +14,7 @@ function Ball() {
   this.lives = 3;
   this.score = 0;
   this.end = false;
-  this.win = false;
+  this.won = false;
 
   this.show = function() {
     fill(0,255,255);
@@ -22,7 +22,11 @@ function Ball() {
   }
 
   this.bounce = function() {
-    if (this.y <= this.height / 2 || this.y >= height - this.height / 2) {
+    if (this.y <= this.height / 2 ) {
+      this.yv *= -1;
+      this.y = this.height/2 + 4;
+    } else if (this.y >= height - this.height / 2){
+      this.y = height - this.height/2 - 4;
       this.yv *= -1;
     }
     if (this.x >= width - this.width / 2) {

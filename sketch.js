@@ -6,6 +6,12 @@ var paddle;
 var walls = [];
 var colors = [[135,206,250],[0,255,255],[30,144,255],[0,0,205],[25,25,112]];
 
+function checkWon() {
+  if (walls.length == 0) {
+    ball.won = true;
+  }
+}
+
 function rebound() {
   if (ball.x < paddle.x + paddle.w / 2 && ball.x > paddle.x - paddle.w / 2) {
     if (ball.y > paddle.y - paddle.h/2 && ball.y < paddle.y + paddle.h/2) {
@@ -61,7 +67,9 @@ function setup() {
 
 function draw() {
   background(0);
-  ball.show();
+  if (!ball.won && !ball.end) {
+    ball.show();
+  }
   ball.update();
   ball.bounce();
   paddle.show();
@@ -72,10 +80,11 @@ function draw() {
     walls[i].show();
   }
   breakWall();
+  checkWon();
   fill(255);
   textSize(20);
   if (!ball.end) {
-    if (ball.win) {
+    if (ball.won) {
       message = "VICTORY!!!!";
     } else {
       message = "lives: " + ball.lives.toString();
