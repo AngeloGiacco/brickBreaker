@@ -6,18 +6,19 @@ function Paddle(x,y) {
   this.y = y;
   this.h = 300;
   this.w = 30;
+  this.yv = 0;
 
   this.show = function() {
     fill(255);
     rect(this.x - this.w/2,this.y - this.h/2,this.w,this.h);
   }
 
-  this.moveUp = function() {
-    this.y -= height / 10;
+  this.move = function() {
+    this.y += this.yv;
   }
 
-  this.moveDown = function() {
-    this.y += height/10;
+  this.setVelocity = function(speed) {
+    this.yv = speed;
   }
 
   this.block = function() {
