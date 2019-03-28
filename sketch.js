@@ -6,12 +6,14 @@ var colors = [[135,206,250],[0,255,255],[30,144,255],[0,0,205],[25,25,112]];
 function checkWon() {
   if (walls.length == 0) {
     ball.won = true;
+    ball.pause = false;
   }
 }
 
 function createText() {
   winText = createP('🎉🎉🎉 YOU WIN! 🎉🎉🎉');
   winText.style('display', 'none');
+  winText.style('color', 'white');
   winText.position(width / 2 - 130, 80);
   instructionText = createP("Press space to Start, press up or down arrow to move up or down");
   instructionText.style('display', 'none');
