@@ -23,18 +23,40 @@ function rebound() {
   }
 }
 
-function breakWall() {
+function breakWall(i) {
+  ball.score += 1;
+  if (walls[i].level > 0) {
+    walls[i].reduceLevel();
+  } else {
+    walls.splice(i,1);
+  }
+}
+
+
+function checkWall() {
   for (i = 0; i < walls.length; i++) {
-    if (ball.x > walls[i].x && ball.x < walls[i].x + walls[i].width) {
-      if (ball.y > walls[i].y && ball.y < walls[i].y + walls[i].height) {
-        ball.xv *= -1;
-        ball.score += 1;
-        if (walls[i].level > 0) {
-          walls[i].reduceLevel();
-        } else {
-          walls.splice(i,1);
-        }
-      }
+    if (ball.x >= walls[i].x && ball.x <= walls[i].x + ball.xv && ball.y >= walls[i].y && ball.y <= walls[i].y + ball.yv) {
+      ball.yv *= -1;
+      ball.xv *= -1;
+      breakWall(i)
+    } else if (ball.x >= walls[i].x && ball.x <= walls[i].x + ball.xv && ball.y >= walls[i].y + walls[i].height && ball.y <= walls[i].y + walls[i].height + ball.yv) {
+      ball.yv *= -1;
+      ball.xv *= -1;
+      breakWall(i)
+    } else if (ball.x >= walls[i].x + walls[i].width && ball.x <= walls[i].x + walls[i].width + ball.xv && ball.y >= walls[i].y && ball.y <= walls[i].y + ball.yv) {
+      ball.yv *= -1;
+      ball.xv *= -1;
+      breakWall(i)
+    }else if (ball.x >= walls[i].x + walls[i].width && ball.x <= walls[i].x + walls[i].width + ball.xv && ball.y >= walls[i].y + walls[i].height && ball.y <= walls[i].y + walls[i].height + ball.yv) {
+      ball.yv *= -1;
+      ball.xv *= -1;
+      breakWall(i)
+    } else if (((ball.x >= walls[i].x + walls[i].width && ball.x <= walls[i].x + walls[i].width + ball.xv) || ball.x >= walls[i].x && ball.x <= walls[i].x + ball.xv) && (ball.y > walls[i].y && ball.y < walls[i].y + walls[i].height)) {
+      ball.xv *= -1;
+      breakWall(i)
+    } else if ((ball.x > walls[i].x && ball.x < walls[i].x + walls[i].width) && ((ball.y >= walls[i].y && ball.y <= walls[i].y + ball.yv) || (ball.y >= walls[i].y + walls[i].height && ball.y <= walls[i].y + walls[i].height + ball.yv))) {
+      ball.yv *= -1;
+      breakWall(i)
     }
   }
 }
@@ -74,7 +96,7 @@ function draw() {
     fill(colors[walls[i].level][0],colors[walls[i].level][1],colors[walls[i].level][2]);
     walls[i].show();
   }
-  breakWall();
+  checkWall();
   checkWon();
   fill(255);
   textSize(20);
