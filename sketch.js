@@ -68,6 +68,7 @@ function draw() {
   ball.bounce();
   paddle.show();
   paddle.block();
+  paddle.move();
   rebound();
   for (i=0;i<walls.length;i++) {
     fill(colors[walls[i].level][0],colors[walls[i].level][1],colors[walls[i].level][2]);
@@ -91,8 +92,12 @@ function draw() {
 
 function keyPressed() {
   if (keyCode == DOWN_ARROW) {
-    paddle.moveDown();
+    paddle.setVelocity(height/100);
   } else if (keyCode == UP_ARROW) {
-    paddle.moveUp();
+    paddle.setVelocity(-height/100);
   }
+}
+
+function keyReleased() {
+  paddle.setVelocity(0);
 }
