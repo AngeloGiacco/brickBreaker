@@ -1,7 +1,6 @@
-//MUST UPDATE BREAK WALL FUNCTION TO SEE WHICH SIDE HIT AND AFFECT Y AND X Vs ACCORDINGLY
 var ball;
 var paddle;
-var walls = [];
+var walls;
 var colors = [[135,206,250],[0,255,255],[30,144,255],[0,0,205],[25,25,112]];
 
 function checkWon() {
@@ -10,13 +9,23 @@ function checkWon() {
   }
 }
 
+function createText() {
+  winText = createP('🎉🎉🎉 YOU WIN! 🎉🎉🎉');
+  winText.style('display', 'none');
+  winText.position(width / 2 - 130, 80);
+  instructionText = createP("Press space to Start, press up or down arrow to move up or down");
+  instructionText.style('display', 'none');
+  instructionText.style('color', 'white');
+  instructionText.position(width / 2 - 240, 100);
+}
+
 function rebound() {
-  if (ball.x < paddle.x + paddle.w / 2 && ball.x > paddle.x - paddle.w / 2) {
-    if (ball.y > paddle.y - paddle.h/2 && ball.y < paddle.y + paddle.h/2) {
+  if (ball.x <= paddle.x + paddle.w / 2 && ball.x >= paddle.x - paddle.w / 2) {
+    if (ball.y >= paddle.y - paddle.h/2 && ball.y <= paddle.y + paddle.h/2) {
       ball.xv *= -1;
-      if (ball.y > paddle.y + (paddle.h / 4) && ball.yv < 0) {
+      if (ball.y >= paddle.y + (paddle.h / 4) && ball.yv <= 0) {
         ball.yv *= -1;
-      } else if (ball.y < paddle.y - (paddle.h / 4) && ball.yv > 0) {
+      } else if (ball.y <= paddle.y - (paddle.h / 4) && ball.yv >= 0) {
         ball.yv *= -1;
       }
     }
@@ -51,10 +60,10 @@ function checkWall() {
       ball.yv *= -1;
       ball.xv *= -1;
       breakWall(i)
-    } else if (((ball.x >= walls[i].x + walls[i].width && ball.x <= walls[i].x + walls[i].width + ball.xv) || ball.x >= walls[i].x && ball.x <= walls[i].x + ball.xv) && (ball.y > walls[i].y && ball.y < walls[i].y + walls[i].height)) {
+    } else if (((ball.x >= walls[i].x + walls[i].width && ball.x <= walls[i].x + walls[i].width + ball.xv) || ball.x >= walls[i].x && ball.x <= walls[i].x + ball.xv) && (ball.y >= walls[i].y && ball.y <= walls[i].y + walls[i].height)) {
       ball.xv *= -1;
       breakWall(i)
-    } else if ((ball.x > walls[i].x && ball.x < walls[i].x + walls[i].width) && ((ball.y >= walls[i].y && ball.y <= walls[i].y + ball.yv) || (ball.y >= walls[i].y + walls[i].height && ball.y <= walls[i].y + walls[i].height + ball.yv))) {
+    } else if ((ball.x >= walls[i].x && ball.x <= walls[i].x + walls[i].width) && ((ball.y >= walls[i].y && ball.y <= walls[i].y + ball.yv) || (ball.y <= walls[i].y + walls[i].height && ball.y >= walls[i].y + walls[i].height + ball.yv))) {
       ball.yv *= -1;
       breakWall(i)
     }
@@ -62,6 +71,7 @@ function checkWall() {
 }
 
 function createWalls() {
+  walls = [];
   for (i=0;i<colors.length;i++) {
     for (j = 0; j < 10; j++) {
       w = (width / 2) / colors.length;
@@ -79,6 +89,7 @@ function setup() {
   ball = new Ball();
   paddle = new Paddle(50,height/2);
   createWalls();
+  createText();
 }
 
 function draw() {
@@ -86,7 +97,9 @@ function draw() {
   if (!ball.won && !ball.end) {
     ball.show();
   }
-  ball.update();
+  if (!ball.pause) {
+    ball.update();
+  }
   ball.bounce();
   paddle.show();
   paddle.block();
@@ -102,14 +115,20 @@ function draw() {
   textSize(20);
   if (!ball.end) {
     if (ball.won) {
-      message = "VICTORY!!!!";
+      winText.style('display', 'block');
     } else {
       message = "lives: " + ball.lives.toString();
+      text(message,width/4,30);
     }
   } else {
     message = "Game over, score: "+ball.score.toString();
+    text(message,width/4,30);
   }
-  text(message,width/4,30);
+  if (ball.pause) {
+    instructionText.style('display', 'block');
+  } else {
+    instructionText.style('display', 'none');
+  }
 }
 
 function keyPressed() {
@@ -117,6 +136,15 @@ function keyPressed() {
     paddle.setVelocity(height/100);
   } else if (keyCode == UP_ARROW) {
     paddle.setVelocity(-height/100);
+  } else if (key == " ") {
+    if (ball.pause) {
+      ball.pause = false;
+    }else if (ball.won) {
+      ball = new Ball();
+      paddle = new Paddle(50,height/2);
+      createWalls();
+      createText();
+    }
   }
 }
 
