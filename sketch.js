@@ -18,7 +18,7 @@ function createText() {
   instructionText = createP("Press space to Start, press up or down arrow to move up or down");
   instructionText.style('display', 'none');
   instructionText.style('color', 'white');
-  instructionText.position(width / 2 - 240, 100);
+  instructionText.position(width / 8, 100);
 }
 
 function rebound() {
