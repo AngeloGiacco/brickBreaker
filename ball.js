@@ -8,12 +8,13 @@ function Ball() {
   this.y = height/2;
   this.xv = random(6,10);
   this.xv *= -1;
-  this.yv = 1;
+  this.yv = random(6,10);
   this.width = 32;
   this.height = 32;
   this.lives = 3;
   this.score = 0;
   this.end = false;
+  this.pause = true;
   this.won = false;
 
   this.show = function() {
@@ -35,6 +36,7 @@ function Ball() {
     } else if (this.x <= this.width / 2) {
       this.lives -= 1;
       if (this.lives > 0) {
+        this.pause = true;
         this.x = width/2 - 50;
         this.y = height/2;
         this.xv = random(6,10);
