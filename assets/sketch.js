@@ -14,7 +14,7 @@ function createText() {
   winText = createP('🎉🎉🎉 YOU WIN! 🎉🎉🎉');
   winText.style('display', 'none');
   winText.style('color', 'white');
-  winText.position(width / 2 - 130, 80);
+  winText.position(width / 2 - 150, 100);
   instructionText = createP("Press space to Start, press up or down arrow to move up or down");
   instructionText.style('display', 'none');
   instructionText.style('color', 'white');
@@ -87,7 +87,7 @@ function createWalls() {
 }
 
 function setup() {
-  createCanvas(800, 800);
+  createCanvas(window.innerWidth, 600);
   ball = new Ball();
   paddle = new Paddle(50,height/2);
   createWalls();
