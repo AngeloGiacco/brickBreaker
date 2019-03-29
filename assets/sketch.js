@@ -13,12 +13,12 @@ function checkWon() {
 function createText() {
   winText = createP('🎉🎉🎉 YOU WIN! 🎉🎉🎉');
   winText.style('display', 'none');
-  winText.style('color', 'white');
+  winText.style('color', 'red');
   winText.position(width / 2 - 150, 100);
   instructionText = createP("Press space to Start, press up or down arrow to move up or down");
   instructionText.style('display', 'none');
-  instructionText.style('color', 'white');
-  instructionText.position(width / 8, 100);
+  instructionText.style('color', 'red');
+  instructionText.position(width / 5, 100);
 }
 
 function rebound() {
