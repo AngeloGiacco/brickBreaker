@@ -9,3 +9,8 @@ canvas {
   box-shadow: 1px 3px 36px 5px rgba(0,0,0,0.75);
   border: 5px solid red;
 }
+#fork_me{
+	position: fixed;
+	right: 0;
+	top: 0;
+}
