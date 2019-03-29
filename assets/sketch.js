@@ -87,7 +87,7 @@ function createWalls() {
 }
 
 function setup() {
-  createCanvas(window.innerWidth, 600);
+  createCanvas(window.innerWidth - 350, 600);
   ball = new Ball();
   paddle = new Paddle(50,height/2);
   createWalls();
